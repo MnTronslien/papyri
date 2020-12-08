@@ -335,7 +335,7 @@ def makeMaps(worldFolder, outputFolder, serverType, unlimitedTracking=False):
                           "Z": Z,
                           "color": color,
                           "name": name,
-                          "dimension": dimension}
+                          "dimension": dimension.replace(":","@")}
             bannerTuple = BannerTuple(**bannerDict)
             banners.append(bannerTuple)
         
@@ -535,7 +535,7 @@ def genZoom17Tiles(level4MapFolder, outputFolder):
                 # do math
                 for numx in range(numTiles):
                     levelNumx = tilex * numTiles + numx
-                    foldername = os.path.join(outputFolder, dim, str(zoom), str(levelNumx))
+                    foldername = os.path.join(outputFolder, dim.replace(":", "@"), str(zoom), str(levelNumx))
                     os.makedirs(foldername, exist_ok=True)
                     for numz in range(numTiles):
                         levelNumz = tilez * numTiles + numz
@@ -611,7 +611,7 @@ def genMapIdMarkers(maps, outputFolder):
 
         coordinates = [[TL, TR, BL, BR, TL]]
         properties = {"scale": scale,
-                      "dimension": dimension,
+                      "dimension": dimension.replace(":","@"),
                       "maps": maps }
         
         geometry = {"type": "Polygon",
